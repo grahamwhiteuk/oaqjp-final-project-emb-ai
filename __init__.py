@@ -1,3 +1,7 @@
+"""
+Module file for emotion detector
+"""
+
 import sys
 sys.path.append('.')
 

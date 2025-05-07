@@ -1,5 +1,8 @@
+"""
+Detects emotions in text strings using an API
+"""
+
 import requests
-import json
 
 URL='https://sn-watson-emotion.labs.skills.network/v1/watson.runtime.nlp.v1/NlpService/EmotionPredict'
 HEADERS={
@@ -8,6 +11,9 @@ HEADERS={
 }
 
 def emotion_detector(text_to_analyze: str) -> dict:
+    """
+    Emotion detection
+    """
     empty_response = {
         "anger": None,
         "disgust": None,
@@ -26,14 +32,14 @@ def emotion_detector(text_to_analyze: str) -> dict:
 
     if r.status_code == 400:
         return empty_response
-    
+
     # parse response
     response = r.json()
     output = response["emotionPredictions"][0]["emotion"]
 
     # find and set dominant emotion
     output["dominant_emotion"] = max(output, key=output.get)
-    
+
     # return results
     return output
 

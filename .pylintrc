@@ -1,0 +1,11 @@
+[MESSAGES CONTROL]
+disable=
+    import-error,
+    wrong-import-position,
+    line-too-long,
+    missing-timeout
+
+[FORMAT]
+
+# Maximum number of characters on a single line.
+max-line-length=120

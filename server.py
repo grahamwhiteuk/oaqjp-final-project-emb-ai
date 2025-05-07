@@ -1,14 +1,24 @@
-from emotion_detection import emotion_detector
+"""
+Provides a Flask server for the emotion detector
+"""
+
 from flask import Flask, render_template, request
+from emotion_detection import emotion_detector
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
+    """
+    Index Route
+    """
     return render_template("index.html")
 
 @app.route("/emotionDetector")
-def emotionDetector():
+def emotion_detector_route():
+    """
+    Emotion Detector Route
+    """
     text_to_analyze = request.args.get('textToAnalyze')
     result = emotion_detector(text_to_analyze)
     if result['dominant_emotion'] is None:
