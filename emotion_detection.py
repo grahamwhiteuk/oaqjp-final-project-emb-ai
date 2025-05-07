@@ -8,9 +8,24 @@ HEADERS={
 }
 
 def emotion_detector(text_to_analyze: str) -> dict:
+    empty_response = {
+        "anger": None,
+        "disgust": None,
+        "fear": None,
+        "joy": None,
+        "sadness": None,
+        "dominant_emotion": None
+    }
+
+    if not text_to_analyze:
+        return empty_response
+
     # http request
     body = { "raw_document": { "text": text_to_analyze } }
     r = requests.post(URL, headers=HEADERS, json=body)
+
+    if r.status_code == 400:
+        return empty_response
     
     # parse response
     response = r.json()
